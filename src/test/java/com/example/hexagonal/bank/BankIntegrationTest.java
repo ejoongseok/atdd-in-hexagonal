@@ -14,6 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.hexagonal.bank.application.dto.DepositRequest;
+import com.example.hexagonal.bank.application.dto.DepositResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
