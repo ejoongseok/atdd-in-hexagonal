@@ -43,6 +43,6 @@ class BankIntegrationTest {
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		DepositResponse depositResponse = objectMapper.readValue(response.getContentAsString(), DepositResponse.class);
 		Assertions.assertThat(depositResponse.getDepositAmount()).isEqualByComparingTo(request.getDepositAmount());
-		Assertions.assertThat(depositResponse.getId()).isGreaterThan(0);
+		Assertions.assertThat(depositResponse.getId()).isPositive();
 	}
 }
