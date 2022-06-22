@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import java.math.BigDecimal;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -14,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.hexagonal.bank.adapter.out.persistence.BankAmountSpringDataRepository;
 import com.example.hexagonal.bank.application.dto.DepositRequest;
 import com.example.hexagonal.bank.application.dto.DepositResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,6 +28,15 @@ class BankIntegrationTest {
 
 	@Autowired
 	MockMvc mockMvc;
+
+	@Autowired
+	BankAmountSpringDataRepository repository;
+
+	@BeforeEach
+	void setUp() {
+	     repository.deleteAll();
+	}
+
 
 	@Test
 	void 입금_요청() throws Exception {
@@ -44,5 +55,24 @@ class BankIntegrationTest {
 		DepositResponse depositResponse = objectMapper.readValue(response.getContentAsString(), DepositResponse.class);
 		Assertions.assertThat(depositResponse.getDepositAmount()).isEqualByComparingTo(request.getDepositAmount());
 		Assertions.assertThat(depositResponse.getId()).isPositive();
+	}
+
+	@Test
+	void 출금_요청() throws Exception {
+		//given
+		BigDecimal withDrawAmount = BigDecimal.valueOf(100);
+		WithDrawRequest request = WithDrawRequest.of(withDrawAmount);
+
+		//when
+		MockHttpServletResponse response = mockMvc.perform(post("/api/withdraw")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(objectMapper.writeValueAsString(request))
+		).andReturn().getResponse();
+
+		//then
+		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		WithDrawResponse withDrawResponse = objectMapper.readValue(response.getContentAsString(), WithDrawResponse.class);
+		Assertions.assertThat(withDrawResponse.getWithDrawAmount()).isEqualByComparingTo(request.getWithDrawAmount());
+		Assertions.assertThat(withDrawResponse.getId()).isPositive();
 	}
 }
