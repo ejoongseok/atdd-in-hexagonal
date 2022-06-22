@@ -12,7 +12,8 @@ public class DepositResponse {
 	private Long id;
 	private BigDecimal depositAmount;
 
-	public DepositResponse(BigDecimal depositAmount) {
-		this.depositAmount = depositAmount;
+	public DepositResponse(DepositAmount depositAmount) {
+		this.id = depositAmount.getId();
+		this.depositAmount = depositAmount.getDepositAmount();
 	}
 }
