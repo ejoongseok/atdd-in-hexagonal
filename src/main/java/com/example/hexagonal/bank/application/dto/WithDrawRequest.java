@@ -7,12 +7,14 @@ import lombok.Getter;
 @Getter
 public class WithDrawRequest {
 	private BigDecimal withDrawAmount;
+	private String customer;
 
-	public WithDrawRequest(BigDecimal withDrawAmount) {
+	public WithDrawRequest(BigDecimal withDrawAmount, String customer) {
 		this.withDrawAmount = withDrawAmount;
+		this.customer = customer;
 	}
 
-	public static WithDrawRequest of(BigDecimal withDrawAmount) {
-		return new WithDrawRequest(withDrawAmount);
+	public static WithDrawRequest of(BigDecimal withDrawAmount, String customer) {
+		return new WithDrawRequest(withDrawAmount, customer);
 	}
 }

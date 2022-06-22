@@ -2,6 +2,8 @@ package com.example.hexagonal.bank.application.service;
 
 import java.math.BigDecimal;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.hexagonal.bank.application.dto.DepositAmount;
@@ -10,6 +12,7 @@ import com.example.hexagonal.bank.application.dto.WithDrawRequest;
 import com.example.hexagonal.bank.application.port.in.WithDrawUseCase;
 import com.example.hexagonal.bank.application.port.out.LoadCustomerPort;
 import com.example.hexagonal.bank.application.port.out.SaveBankPort;
+import com.example.hexagonal.bank.domain.Balance;
 import com.example.hexagonal.bank.domain.Bank;
 import com.example.hexagonal.bank.application.dto.DepositRequest;
 import com.example.hexagonal.bank.application.port.in.DepositUseCase;
@@ -18,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BankService implements DepositUseCase, WithDrawUseCase {
 
 	private final SaveBankPort saveBankPort;
@@ -27,8 +31,8 @@ public class BankService implements DepositUseCase, WithDrawUseCase {
 	public DepositAmount deposit(DepositRequest request) {
 		BigDecimal balance = loadCustomerPort.getBalance(request.getCustomer());
 
-		Bank bank = new Bank(request.getCustomer());
-		bank.deposit(request.getDepositAmount(), balance);
+		Bank bank = new Bank(request.getCustomer(), new Balance(balance));
+		bank.deposit(request.getDepositAmount());
 		Bank newAccount = saveBankPort.save(bank);
 
 		return new DepositAmount(newAccount);
@@ -36,6 +40,10 @@ public class BankService implements DepositUseCase, WithDrawUseCase {
 
 	@Override
 	public WithDrawAmount withDraw(WithDrawRequest request) {
-		return null;
+		BigDecimal balance = loadCustomerPort.getBalance(request.getCustomer());
+		Bank bank = new Bank(request.getCustomer(), new Balance(balance));
+		bank.withDraw(request.getWithDrawAmount());
+		Bank newBank = saveBankPort.save(bank);
+		return new WithDrawAmount(newBank);
 	}
 }

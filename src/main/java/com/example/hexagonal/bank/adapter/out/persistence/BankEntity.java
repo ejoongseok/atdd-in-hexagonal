@@ -1,20 +1,17 @@
 package com.example.hexagonal.bank.adapter.out.persistence;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
+import com.example.hexagonal.bank.domain.Balance;
 
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BankEntity {
 	@Id
@@ -32,5 +29,21 @@ public class BankEntity {
 		this.amount = amount;
 		this.customer = customer;
 		this.balance = balance;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public Balance getBalance() {
+		return new Balance(balance);
+	}
+
+	public String getCustomer() {
+		return customer;
 	}
 }

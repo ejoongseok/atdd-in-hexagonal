@@ -64,8 +64,10 @@ class BankIntegrationTest {
 	@Test
 	void 출금_요청() throws Exception {
 		//given
-		BigDecimal withDrawAmount = BigDecimal.valueOf(100);
-		WithDrawRequest request = WithDrawRequest.of(withDrawAmount);
+		입금_요청();
+		BigDecimal withDrawAmount = BigDecimal.valueOf(50);
+		String customer = "joongseok";
+		WithDrawRequest request = WithDrawRequest.of(withDrawAmount, customer);
 
 		//when
 		MockHttpServletResponse response = mockMvc.perform(post("/api/withdraw")
@@ -77,6 +79,8 @@ class BankIntegrationTest {
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		WithDrawResponse withDrawResponse = objectMapper.readValue(response.getContentAsString(), WithDrawResponse.class);
 		Assertions.assertThat(withDrawResponse.getWithDrawAmount()).isEqualByComparingTo(request.getWithDrawAmount());
+		Assertions.assertThat(withDrawResponse.getCustomer()).isEqualTo(customer);
+		Assertions.assertThat(withDrawResponse.getBalance()).isEqualByComparingTo(BigDecimal.valueOf(50));
 
 	}
 }
