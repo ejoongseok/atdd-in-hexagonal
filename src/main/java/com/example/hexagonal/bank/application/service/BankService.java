@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.hexagonal.bank.application.dto.DepositAmount;
 import com.example.hexagonal.bank.application.port.out.SaveBankPort;
-import com.example.hexagonal.bank.domain.Amount;
+import com.example.hexagonal.bank.domain.BankAmount;
 import com.example.hexagonal.bank.application.dto.DepositRequest;
 import com.example.hexagonal.bank.application.port.in.DepositUseCase;
 
@@ -19,10 +19,10 @@ public class BankService implements DepositUseCase {
 
 	@Override
 	public DepositAmount deposit(DepositRequest request) {
-		Amount amount = new Amount();
+		BankAmount amount = new BankAmount();
 		amount.deposit(request.getDepositAmount());
-		Amount newAmount = saveBankPort.save(amount);
+		BankAmount newAmount = saveBankPort.save(amount);
 
-		return new DepositAmount(newAmount.getId(), newAmount.getDepositAmount());
+		return new DepositAmount(newAmount.getId(), newAmount.getAmount());
 	}
 }
