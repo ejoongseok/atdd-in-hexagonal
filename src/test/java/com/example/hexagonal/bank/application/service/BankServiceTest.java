@@ -3,10 +3,12 @@ package com.example.hexagonal.bank.application.service;
 import java.math.BigDecimal;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.hexagonal.bank.adapter.out.persistence.BankAmountSpringDataRepository;
 import com.example.hexagonal.bank.application.web.DepositAmount;
 import com.example.hexagonal.bank.application.web.DepositRequest;
 import com.example.hexagonal.bank.application.web.WithDrawAmount;
@@ -19,7 +21,15 @@ class BankServiceTest {
 	@Autowired BankService bankService;
 
 	@Autowired
+	BankAmountSpringDataRepository repository;
+
+	@Autowired
 	BankFixture bankFixture;
+
+	@BeforeEach
+	void setUp() {
+		repository.deleteAll();
+	}
 
 	@Test
 	void depositAmountTest() {
@@ -29,7 +39,7 @@ class BankServiceTest {
 		DepositRequest request = DepositRequest.of(amount, customer);
 
 		// when
-	    DepositAmount depositAmount = bankService.deposit(request);
+		DepositAmount depositAmount = bankService.deposit(request);
 		// then
 		Assertions.assertThat(depositAmount.getDepositAmount()).isEqualByComparingTo(request.getDepositAmount());
 		Assertions.assertThat(depositAmount.getCustomer()).isEqualTo(customer);
