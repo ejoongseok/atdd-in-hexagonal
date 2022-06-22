@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.hexagonal.bank.application.dto.DepositAmount;
-import com.example.hexagonal.bank.application.dto.DepositRequest;
-import com.example.hexagonal.bank.application.dto.WithDrawAmount;
-import com.example.hexagonal.bank.application.dto.WithDrawRequest;
+import com.example.hexagonal.bank.application.web.DepositAmount;
+import com.example.hexagonal.bank.application.web.DepositRequest;
+import com.example.hexagonal.bank.application.web.WithDrawAmount;
+import com.example.hexagonal.bank.application.web.WithDrawRequest;
 
 @SpringBootTest
 class BankServiceTest {

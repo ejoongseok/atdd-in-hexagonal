@@ -1,4 +1,4 @@
-package com.example.hexagonal.bank.application.dto;
+package com.example.hexagonal.bank.application.web;
 
 import java.math.BigDecimal;
 

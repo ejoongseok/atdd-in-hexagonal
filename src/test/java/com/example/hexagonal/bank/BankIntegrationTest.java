@@ -16,10 +16,10 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.hexagonal.bank.adapter.out.persistence.BankAmountSpringDataRepository;
-import com.example.hexagonal.bank.application.dto.DepositRequest;
-import com.example.hexagonal.bank.application.dto.DepositResponse;
-import com.example.hexagonal.bank.application.dto.WithDrawRequest;
-import com.example.hexagonal.bank.application.dto.WithDrawResponse;
+import com.example.hexagonal.bank.application.web.DepositRequest;
+import com.example.hexagonal.bank.application.web.DepositResponse;
+import com.example.hexagonal.bank.application.web.WithDrawRequest;
+import com.example.hexagonal.bank.application.web.WithDrawResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest

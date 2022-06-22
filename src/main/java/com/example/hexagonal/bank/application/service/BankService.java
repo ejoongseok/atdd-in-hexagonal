@@ -6,15 +6,15 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.example.hexagonal.bank.application.dto.DepositAmount;
-import com.example.hexagonal.bank.application.dto.WithDrawAmount;
-import com.example.hexagonal.bank.application.dto.WithDrawRequest;
+import com.example.hexagonal.bank.application.web.DepositAmount;
+import com.example.hexagonal.bank.application.web.WithDrawAmount;
+import com.example.hexagonal.bank.application.web.WithDrawRequest;
 import com.example.hexagonal.bank.application.port.in.WithDrawUseCase;
 import com.example.hexagonal.bank.application.port.out.LoadCustomerPort;
 import com.example.hexagonal.bank.application.port.out.SaveBankPort;
 import com.example.hexagonal.bank.domain.Balance;
 import com.example.hexagonal.bank.domain.Bank;
-import com.example.hexagonal.bank.application.dto.DepositRequest;
+import com.example.hexagonal.bank.application.web.DepositRequest;
 import com.example.hexagonal.bank.application.port.in.DepositUseCase;
 
 import lombok.RequiredArgsConstructor;
