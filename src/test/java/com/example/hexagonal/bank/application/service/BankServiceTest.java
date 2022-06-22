@@ -11,12 +11,15 @@ import com.example.hexagonal.bank.application.web.DepositAmount;
 import com.example.hexagonal.bank.application.web.DepositRequest;
 import com.example.hexagonal.bank.application.web.WithDrawAmount;
 import com.example.hexagonal.bank.application.web.WithDrawRequest;
+import com.example.hexagonal.bank.fixture.BankFixture;
 
 @SpringBootTest
 class BankServiceTest {
 
 	@Autowired BankService bankService;
 
+	@Autowired
+	BankFixture bankFixture;
 
 	@Test
 	void depositAmountTest() {
@@ -36,18 +39,8 @@ class BankServiceTest {
 	@Test
 	void withdrawAmountTest() {
 		// given
-		BigDecimal amount = BigDecimal.valueOf(100);
 		String customer = "joongseok";
-		DepositRequest request = DepositRequest.of(amount, customer);
-
-		// when
-	    DepositAmount depositAmount = bankService.deposit(request);
-
-		// then
-		Assertions.assertThat(depositAmount.getDepositAmount()).isEqualByComparingTo(request.getDepositAmount());
-		Assertions.assertThat(depositAmount.getCustomer()).isEqualTo(customer);
-		Assertions.assertThat(depositAmount.getBalance()).isEqualByComparingTo(amount);
-
+		bankFixture.입금_요청(100, customer);
 
 		BigDecimal withdrawAmountDecimal = BigDecimal.valueOf(60);
 		WithDrawRequest withDrawRequest = WithDrawRequest.of(withdrawAmountDecimal, customer);
