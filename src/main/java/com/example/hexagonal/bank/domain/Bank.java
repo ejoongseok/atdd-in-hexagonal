@@ -11,17 +11,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankAmount {
-	private Long id;
+public class Bank {
 	private BigDecimal amount;
-
 	private String customer;
+	private BigDecimal balance;
 
-	public BankAmount(String customer) {
+	public Bank(String customer) {
 		this.customer = customer;
 	}
 
-	public void deposit(BigDecimal depositAmount) {
+	public void deposit(BigDecimal depositAmount, BigDecimal balance) {
 		this.amount = depositAmount;
+		this.balance = balance.add(amount);
 	}
 }
