@@ -8,10 +8,14 @@ import com.example.hexagonal.bank.domain.BankAmount;
 public class BankAmountMapper {
 
 	public BankAmount toDomain(BankAmountEntity entity) {
-		return new BankAmount(entity.getId(), entity.getAmount());
+		return BankAmount.builder()
+			.id(entity.getId())
+			.amount(entity.getAmount())
+			.customer(entity.getCustomer())
+			.build();
 	}
 
 	public BankAmountEntity toEntity(BankAmount domain) {
-		return new BankAmountEntity(domain.getId(), domain.getAmount());
+		return new BankAmountEntity(domain.getId(), domain.getAmount(), domain.getCustomer());
 	}
 }

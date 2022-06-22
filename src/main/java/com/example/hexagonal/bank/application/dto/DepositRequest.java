@@ -10,11 +10,14 @@ import lombok.NoArgsConstructor;
 public class DepositRequest {
 
 	private BigDecimal depositAmount;
-	public DepositRequest(BigDecimal depositAmount) {
+	private String customer;
+
+	public DepositRequest(BigDecimal depositAmount, String customer) {
 		this.depositAmount = depositAmount;
+		this.customer = customer;
 	}
 
-	public static DepositRequest of(BigDecimal depositAmount) {
-		return new DepositRequest(depositAmount);
+	public static DepositRequest of(BigDecimal depositAmount, String customer) {
+		return new DepositRequest(depositAmount, customer);
 	}
 }

@@ -20,7 +20,8 @@ class BankServiceTest {
 	void depositAmountTest() {
 		// given
 		BigDecimal amount = BigDecimal.valueOf(100);
-		DepositRequest request = DepositRequest.of(amount);
+		String customer = "joongseok";
+		DepositRequest request = DepositRequest.of(amount, customer);
 
 		// when
 	    DepositAmount depositAmount = bankService.deposit(request);

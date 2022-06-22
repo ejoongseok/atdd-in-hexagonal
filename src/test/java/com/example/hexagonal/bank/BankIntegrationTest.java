@@ -44,7 +44,8 @@ class BankIntegrationTest {
 	void 입금_요청() throws Exception {
 		//given
 		BigDecimal depositAmount = BigDecimal.valueOf(100);
-		DepositRequest request = DepositRequest.of(depositAmount);
+		String customer = "joongseok";
+		DepositRequest request = DepositRequest.of(depositAmount, customer);
 
 		//when
 		MockHttpServletResponse response = mockMvc.perform(post("/api/deposit")
