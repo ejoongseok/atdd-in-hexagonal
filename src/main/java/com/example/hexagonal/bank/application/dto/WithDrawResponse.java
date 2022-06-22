@@ -8,4 +8,9 @@ import lombok.Getter;
 public class WithDrawResponse {
 	private long id;
 	private BigDecimal withDrawAmount;
+
+	public WithDrawResponse(WithDrawAmount withDrawAmount) {
+		this.id = withDrawAmount.getId();
+		this.withDrawAmount = withDrawAmount.getDepositAmount();
+	}
 }
