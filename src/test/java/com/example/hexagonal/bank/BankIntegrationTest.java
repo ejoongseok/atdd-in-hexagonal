@@ -57,7 +57,8 @@ class BankIntegrationTest {
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		DepositResponse depositResponse = objectMapper.readValue(response.getContentAsString(), DepositResponse.class);
 		Assertions.assertThat(depositResponse.getDepositAmount()).isEqualByComparingTo(request.getDepositAmount());
-		Assertions.assertThat(depositResponse.getId()).isPositive();
+		Assertions.assertThat(depositResponse.getCustomer()).isEqualTo(customer);
+		Assertions.assertThat(depositResponse.getBalance()).isEqualByComparingTo(depositAmount);
 	}
 
 	@Test
@@ -76,6 +77,6 @@ class BankIntegrationTest {
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		WithDrawResponse withDrawResponse = objectMapper.readValue(response.getContentAsString(), WithDrawResponse.class);
 		Assertions.assertThat(withDrawResponse.getWithDrawAmount()).isEqualByComparingTo(request.getWithDrawAmount());
-		Assertions.assertThat(withDrawResponse.getId()).isPositive();
+
 	}
 }

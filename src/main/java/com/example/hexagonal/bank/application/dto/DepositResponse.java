@@ -9,11 +9,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DepositResponse {
 
-	private Long id;
 	private BigDecimal depositAmount;
+	private String customer;
+
+	private BigDecimal balance;
 
 	public DepositResponse(DepositAmount depositAmount) {
-		this.id = depositAmount.getId();
 		this.depositAmount = depositAmount.getDepositAmount();
+		this.customer = depositAmount.getCustomer();
+		this.balance = depositAmount.getBalance();
 	}
 }

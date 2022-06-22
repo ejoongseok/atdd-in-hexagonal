@@ -1,7 +1,7 @@
 package com.example.hexagonal.bank.application.port.out;
 
-import com.example.hexagonal.bank.domain.BankAmount;
+import com.example.hexagonal.bank.domain.Bank;
 
 public interface SaveBankPort {
-	BankAmount save(BankAmount amount);
+	Bank save(Bank amount);
 }

@@ -26,8 +26,9 @@ class BankServiceTest {
 		// when
 	    DepositAmount depositAmount = bankService.deposit(request);
 		// then
-		Assertions.assertThat(depositAmount.getId()).isPositive();
 		Assertions.assertThat(depositAmount.getDepositAmount()).isEqualByComparingTo(request.getDepositAmount());
+		Assertions.assertThat(depositAmount.getCustomer()).isEqualTo(customer);
+		Assertions.assertThat(depositAmount.getBalance()).isEqualByComparingTo(amount);
 	}
 
 }

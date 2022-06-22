@@ -2,15 +2,20 @@ package com.example.hexagonal.bank.application.dto;
 
 import java.math.BigDecimal;
 
+import com.example.hexagonal.bank.domain.Bank;
+
 import lombok.Getter;
 
 @Getter
 public class DepositAmount {
-	private Long id;
 	private BigDecimal depositAmount;
+	private BigDecimal balance;
 
-	public DepositAmount(Long id, BigDecimal depositAmount) {
-		this.id = id;
-		this.depositAmount = depositAmount;
+	private String customer;
+
+	public DepositAmount(Bank newAccount) {
+		this.depositAmount = newAccount.getAmount();
+		this.balance = newAccount.getBalance();
+		this.customer = newAccount.getCustomer();
 	}
 }

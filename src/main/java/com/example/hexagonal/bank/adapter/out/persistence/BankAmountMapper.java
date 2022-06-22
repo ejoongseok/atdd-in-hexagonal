@@ -2,20 +2,20 @@ package com.example.hexagonal.bank.adapter.out.persistence;
 
 import org.springframework.stereotype.Component;
 
-import com.example.hexagonal.bank.domain.BankAmount;
+import com.example.hexagonal.bank.domain.Bank;
 
 @Component
 public class BankAmountMapper {
 
-	public BankAmount toDomain(BankAmountEntity entity) {
-		return BankAmount.builder()
-			.id(entity.getId())
+	public Bank toDomain(BankEntity entity) {
+		return Bank.builder()
 			.amount(entity.getAmount())
 			.customer(entity.getCustomer())
+			.balance(entity.getBalance())
 			.build();
 	}
 
-	public BankAmountEntity toEntity(BankAmount domain) {
-		return new BankAmountEntity(domain.getId(), domain.getAmount(), domain.getCustomer());
+	public BankEntity toEntity(Bank domain) {
+		return new BankEntity(domain.getAmount(), domain.getCustomer(), domain.getBalance());
 	}
 }
